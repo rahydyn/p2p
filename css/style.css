@@ -1,0 +1,238 @@
+html,
+body .container {
+  height: 100%;
+  width: 100%;
+}
+body {
+  background: rgb(238, 174, 202);
+  background: radial-gradient(
+    circle,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
+  color: black;
+  font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+}
+input,
+textarea,
+select,
+button {
+  font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
+}
+.container {
+  /* width: 90%; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#create_discussion {
+  width: 100%;
+  top: 0;
+  height: 40px;
+  position: fixed;
+  z-index: 1;
+  background-color: gray;
+  padding: 10px;
+  padding-top: 20px;
+}
+#create_discussion > div {
+  width: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#create_discussion form {
+  width: 95%;
+}
+#setting {
+  width: 5%;
+}
+ul {
+  list-style: none;
+  margin: 0.5em 0 0;
+  padding: 0;
+  width: 100%;
+}
+li {
+  display: inline-block;
+  margin-left: 1em;
+  line-height: 1em;
+}
+li:first-child {
+  margin-left: 0;
+}
+textarea,
+input,
+select,
+button {
+  border-radius: 8px;
+}
+
+button,
+input {
+  border: none;
+}
+.card {
+  background: rgba(255, 255, 255, 0.25); /* カード背景の色＋不透明度 */
+  backdrop-filter: blur(10px); /* 背景のぼかし具合 */
+  border-radius: 16px; /* 角の丸み */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* 外側の影 */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* 縁のスタイル */
+}
+
+.icon {
+  display: inline-block;
+  height: 18px;
+  width: 18px;
+  vertical-align: bottom;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.icon-user {
+  background-image: url(../img/icon-user.png);
+}
+.icon-calendar {
+  background-image: url(../img/icon-calendar.png);
+}
+.icon-clock {
+  background-image: url(../img/icon-clock.png);
+}
+.icon-likes {
+  background-image: url(../img/icon-like.png);
+}
+.form > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.test-area .form {
+  width: 100%;
+  height: 30px;
+  padding: 0;
+}
+form {
+  height: 100%;
+  width: 100%;
+  /* background-color: gray; */
+}
+.form {
+  width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+#form-area {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  /* background-color: blue; */
+}
+.update-area {
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  /* background-color: blue; */
+}
+#form-title-area {
+  width: 60%;
+}
+#form-user-area {
+  width: 15%;
+}
+#form-user-area > select {
+  width: 100%;
+}
+#form-btn-area {
+  width: 15%;
+}
+
+#input_title {
+  width: 90%;
+}
+
+@media screen and (max-width: 480px) {
+  #contents-area {
+    padding-top: 70px;
+  }
+  .content-unit {
+    margin: 5px 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /* border: solid 2px;
+    border-color: gray;
+    border-radius: 3px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media screen and (min-width: 480px) {
+  #create_discussion > div {
+    width: 50%;
+  }
+  #contents-area {
+    margin-top: 20px;
+    padding-top: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .content-unit {
+    width: 350px;
+    margin: 5px 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    /* border: solid 2px;
+    border-color: gray;
+    border-radius: 3px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.content_output,
+.content_input {
+  width: 90%;
+  padding: auto;
+  /* border-bottom: solid px;
+  border-color: gray; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content_output > div {
+  margin: auto;
+}
+.content_input > div {
+  margin: auto;
+}
+.title {
+  width: 70%;
+}
+.likes {
+  width: 20%;
+}
+.like {
+  width: 10%;
+}
