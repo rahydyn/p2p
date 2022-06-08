@@ -98,7 +98,7 @@ if($status==false) {
       array_push($members, array(h($res["id"]), h($res["name"])));
   }
 }
-$members = json_encode($members);
+$json_members = json_encode($members);
 
 // カード情報読み込み
 $tbl_users = "users";
@@ -125,6 +125,24 @@ if($status==false) {
 $discussions = json_encode($discussions);
 
 // var_dump($discussions);
+
+// ユーザ編集画面
+$template_user_edit = "";
+console_log($members[0]);
+for($i=0; $i<count($members); $i++){
+    $template_user_edit .= '<div class="edit_member_unit">';
+    $template_user_edit .= '<form action="edit_member.php" method="post">';
+    $template_user_edit .= '<ul>';
+    $template_user_edit .= '<li>id: '.$members[$i][0].'</li>';
+    $template_user_edit .= '<li><input type="hidden" name="edit_id" value="'.$members[$i][0].'"></li>';
+    $template_user_edit .= '<li><input type="text" name="edit_name" value="'.$members[$i][1].'"></li>';
+    $template_user_edit .= '<li><input type="submit" value="編集完了"></li>';
+    $template_user_edit .= '</ul>';
+    $template_user_edit .= '</form>';
+    $template_user_edit .= '</div>';
+}
+
+
 
 // ポスト
 if($_SERVER['REQUEST_METHOD']=="POST") {
@@ -190,7 +208,7 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
     <div class="container">
         <div id="create_discussion">
             <div>
-                <div class="icon" id="setting"><a href="#"><img src="./img/setting.png" alt=""></a></div>
+                <button class="icon" id="setting"><img src="./img/setting.png" alt="設定"></button>
                 <form action="" method="post">
                     <div id="form-area">
                         <div id="form-title-area">
@@ -208,13 +226,30 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
                 </form>
             </div>
         </div>
+        <!-- <div id="members_area" class="hidden card"> -->
+        <div id="members_area" class="show card">
+            <div id="create_members" >
+                <div>
+                    <form action="create_member.php" method="post">
+                        <ul>
+                            <li>新規追加</li>
+                            <li><input type="text" name="create_user"></li>
+                            <li><input type="submit" value="追加"></li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+            <div id="edit_members" >
+                <?=$template_user_edit?>
+            </div>
+        </div>
         <div id="contents-area">
         </div>
     <script>
 
         //select要素を取得する
         const selectUser = document.getElementById('select_owner');
-        let members = <?= $members ?>;
+        let members = <?= $json_members ?>;
         // console.log("member");
         // console.log(member);
 
@@ -273,19 +308,19 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
                 template += "<ul class='update-area'>";
                 template += "<li class='update-user-area'>";
                 template += "<span class='icon icon-user'></span><span>";
-                template += "<select class='select_speaker' name='speaker_id' id='speaker_id"+id+"'>";
+                template += "<select required class='select_speaker' name='speaker_id' id='speaker_id"+id+"'>";
                 template += "<option value='' selected>だれ？</option>";
                 template += "</select>";
                 template += "</span></li>";
                 template += "<li class='update-user-area'>";
                 template += "<span class='icon icon-calendar'></span><span>";
-                template += "<select class='select_speaker_date' name='speaker_date' id='speaker_date"+id+"'>";
+                template += "<select required class='select_speaker_date' name='speaker_date' id='speaker_date"+id+"'>";
                 template += "<option value='' selected>いつ？</option>";
                 template += "</select>";
                 template += "</span></li>";
                 template += "<li class='update-user-area'>";
                 template += "<span class='icon icon-clock'></span><span>";
-                template += "<select class='select_speaker_time' name='speaker_time' id='speaker_time"+id+"'>";
+                template += "<select required class='select_speaker_time' name='speaker_time' id='speaker_time"+id+"'>";
                 template += "<option value='' selected>なんじ？</option>";
                 template += "</select>";
                 template += "</span></li>";
@@ -355,6 +390,14 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
         }
         
         $(function(){
+            $("#setting").on("click", function(){
+                $("#members_area").toggleClass("hidden");
+                $("#members_area").toggleClass("show");
+                console.log("click");
+            });
+        });
+
+        $(function(){
             $('#form-btn-area > input').on('click', function(){
                 let msg = "";
                 if($('#input_title').val() === ''){
@@ -371,16 +414,18 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
                 }
             });
         });
-        $(function(){
-            $('.update-btn').on('click', function(){
+
+        let targets = document.getElementsByClassName('update-btn');
+        for(let i = 0; i < targets.length; i++){
+            targets[i].addEventListener("click",() => {
                 let msg = "";
-                if($('this.parent().parent() .select_speaker').val() == ''){
+                if((this.parentElement.parentElement .select_speaker).val() == ''){
                     msg += '名前を入力してください！';
                 }
-                if($('this.parent().parent() .select_speaker_date').val() == ''){
+                if((this.parent().parent() .select_speaker_date).val() == ''){
                     msg += '日付を入力してください！';
                 }
-                if($('this.parent().parent() .select_speaker_time').val() == ''){
+                if((this.parent().parent() .select_speaker_time).val() == ''){
                     msg += '時間を入力してください！';
                 }
                 if(msg != ""){
@@ -389,8 +434,8 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
                 }else {
                     return true;
                 }
-            });
-        });
+            }, false);
+        }
 
         function add_like(elem){
             const param = {

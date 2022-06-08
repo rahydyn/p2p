@@ -21,6 +21,14 @@ button {
   font-family: "Helvetica Neue", "Helvetica", "Hiragino Sans",
     "Hiragino Kaku Gothic ProN", "Arial", "Yu Gothic", "Meiryo", sans-serif;
 }
+
+.hidden {
+  display: none;
+}
+.show {
+  display: flex;
+}
+
 .container {
   /* width: 90%; */
   display: flex;
@@ -36,9 +44,13 @@ button {
   background-color: gray;
   padding: 10px;
   padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #create_discussion > div {
   width: 100%;
+  height: 100%;
   margin-left: 10px;
   margin-right: 10px;
   display: flex;
@@ -51,6 +63,15 @@ button {
 }
 #setting {
   width: 5%;
+  height: 100%;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#setting a,
+#setting img {
+  height: 80%;
 }
 ul {
   list-style: none;
@@ -105,6 +126,7 @@ input {
 .icon-likes {
   background-image: url(../img/icon-like.png);
 }
+
 .form > div {
   display: flex;
   justify-content: center;
@@ -163,15 +185,44 @@ form {
   width: 15%;
 }
 
+#members_area {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 #input_title {
   width: 90%;
 }
 
+#edit_members {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit_member_unit{
+  height: 30px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
 @media screen and (max-width: 480px) {
+  #members_area {
+    margin-top: 70px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 90%;
+  }
   #contents-area {
     padding-top: 70px;
   }
   .content-unit {
+    width: 90%;
     margin: 5px 10px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -185,6 +236,12 @@ form {
   }
 }
 @media screen and (min-width: 480px) {
+  #members_area {
+    margin-top: 70px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 400px;
+  }
   #create_discussion > div {
     width: 50%;
   }
@@ -194,9 +251,10 @@ form {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
   }
   .content-unit {
-    width: 350px;
+    width: 400px;
     margin: 5px 10px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -219,6 +277,7 @@ form {
   display: flex;
   align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 .content_output > div {
