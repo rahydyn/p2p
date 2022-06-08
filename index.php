@@ -128,7 +128,6 @@ $discussions = json_encode($discussions);
 
 // ユーザ編集画面
 $template_user_edit = "";
-console_log($members[0]);
 for($i=0; $i<count($members); $i++){
     $template_user_edit .= '<div class="edit_member_unit">';
     $template_user_edit .= '<form action="edit_member.php" method="post">';
@@ -226,8 +225,8 @@ if($_SERVER['REQUEST_METHOD']=="POST") {
                 </form>
             </div>
         </div>
-        <!-- <div id="members_area" class="hidden card"> -->
-        <div id="members_area" class="show card">
+        <div id="members_area" class="hidden card">
+        <!-- <div id="members_area" class="show card"> -->
             <div id="create_members" >
                 <div>
                     <form action="create_member.php" method="post">

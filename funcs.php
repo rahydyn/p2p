@@ -2,8 +2,6 @@
 include("secret.php");
 // 以下の$sakura_idと$sakura_pwを取得しています。今回は.gitignoreでこちらを見えなくおります。
 // 直接書き換えてください。
-$sakura_id = sakuraID();
-$sakura_pw = sakuraPW();
 
 
 // XSS対応関数
@@ -29,13 +27,13 @@ function db_conn(){
       //localhost以外＊＊自分で書き直してください！！＊＊
       if($_SERVER["HTTP_HOST"] != 'localhost'){
           $db_name = "rahydyn_app_p2p";  //データベース名
-          $db_id   = $sakura_id;  //アカウント名（さくらコントロールパネルに表示されています）
-          $db_pw   = $sakura_pw;  //パスワード(さくらサーバー最初にDB作成する際に設定したパスワード)
+          $db_id   = sakuraID();  //アカウント名（さくらコントロールパネルに表示されています）
+          $db_pw   = sakuraPW();  //パスワード(さくらサーバー最初にDB作成する際に設定したパスワード)
           $db_host = "mysql639.db.sakura.ne.jp"; //例）mysql**db.ne.jp...
       }
       return new PDO('mysql:dbname='.$db_name.';charset=utf8;host='.$db_host, $db_id, $db_pw);
   } catch (PDOException $e) {
-      exit('DB Connection Error:'.$e->getMessage());
+      exit('DB Connection Error:'.$e->getMessage()." ".$sakura_id." / ".$sakura_pw);
   }
 }
 
